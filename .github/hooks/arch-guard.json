@@ -1,0 +1,12 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "type": "command",
+        "command": "bash .github/hooks/scripts/arch-test.sh",
+        "windows": "powershell -ExecutionPolicy Bypass -File .github/hooks/scripts/arch-test.ps1",
+        "timeout": 60
+      }
+    ]
+  }
+}
