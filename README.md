@@ -99,3 +99,12 @@ To see the defenses in action, try asking Copilot to:
 | `Application_Should_Not_Depend_On_Api`              | Application isolation    |
 | `Infrastructure_Should_Not_Depend_On_Api`           | Infrastructure isolation |
 | `Domain_Interfaces_Should_Not_Have_Implementations` | Structural rule          |
+
+## The Four Features Demonstrated
+
+| Feature                 | File                                                | Purpose                                                                                         |
+| ----------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **Custom Instructions** | `.github/copilot-instructions.md`                   | Always-on guardrails — tells Copilot the architecture rules on every interaction                |
+| **Agent Skill**         | `.github/skills/clean-architecture-review/SKILL.md` | Portable, on-demand skill for reviewing architecture violations (`/clean-architecture-review`)  |
+| **Custom Agent**        | `.github/agents/arch-guardian.agent.md`             | "Architecture Guardian" persona — select from agents dropdown for a specialized reviewer        |
+| **Hooks**               | `.github/hooks/arch-guard.json`                     | `PostToolUse` hook that auto-runs `dotnet test` after every file edit and feeds violations back |
