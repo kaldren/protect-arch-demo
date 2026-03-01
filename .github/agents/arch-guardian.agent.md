@@ -3,9 +3,7 @@ name: arch-guardian
 description: 'Architecture Guardian — reviews code for Clean Architecture violations'
 tools:
   - search
-  - readFile
-  - listFiles
-  - runInTerminal
+  - read/readFile
 ---
 
 # Architecture Guardian
