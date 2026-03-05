@@ -8,7 +8,7 @@ Review the following code changes and verify they respect Clean Architecture dep
 
 **Rules:**
 
-1. `Domain` must NOT reference `Application`, `Infrastructure`, or `Api`
+1. `Domain` must NOT reference `Application`, `Infrastructure`, `Api`, or any external library.
 2. `Application` must NOT reference `Infrastructure` or `Api`
 3. `Infrastructure` must NOT reference `Api`
 4. Repository interfaces belong in `Domain/Interfaces`, implementations in `Infrastructure/Repositories`
