@@ -108,3 +108,16 @@ To see the defenses in action, try asking Copilot to:
 | **Agent Skill**         | `.github/skills/clean-architecture-review/SKILL.md` | Portable, on-demand skill for reviewing architecture violations (`/clean-architecture-review`)  |
 | **Custom Agent**        | `.github/agents/arch-guardian.agent.md`             | "Architecture Guardian" persona — select from agents dropdown for a specialized reviewer        |
 | **Hooks**               | `.github/hooks/arch-guard.json`                     | `PostToolUse` hook that auto-runs `dotnet test` after every file edit and feeds violations back |
+| **Prompt Files**        | `.github/prompts/validate-architecture.prompt.md`   | Reusable prompt that can be invoked to validate architecture rules on demand                    |
+
+## IDE Support
+
+Not all Copilot customization features are available in every IDE. Here's what's supported today:
+
+| Feature                 | VS Code | Visual Studio |
+| ----------------------- | :-----: | :-----------: |
+| **Custom Instructions** |   ✅    |      ✅       |
+| **Prompt Files**        |   ✅    |      ✅       |
+| **Agent Skills**        |   ✅    |      ❌       |
+| **Custom Agents**       |   ✅    | ✅ (Preview)  |
+| **Hooks**               |   ✅    |      ❌       |

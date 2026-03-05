@@ -1,10 +1,10 @@
 ---
-description: 'Validate that code changes follow Clean Architecture dependency rules'
+description: 'Validate the current code structure against Clean Architecture rules. Identify any violations and suggest corrections.'
 ---
 
 # Validate Architecture
 
-Review the following code changes and verify they respect Clean Architecture dependency rules:
+Scan each class library for Clean Architecture violations based on the following rules:
 
 **Rules:**
 
@@ -14,16 +14,19 @@ Review the following code changes and verify they respect Clean Architecture dep
 4. Repository interfaces belong in `Domain/Interfaces`, implementations in `Infrastructure/Repositories`
 5. Use cases belong in `Application/UseCases`
 
-For each file changed, answer:
+If violations are found, explain that in bold and red with emoji that the architecture is at risk. List each violation with the file, line number, and which rule was broken.
 
-- Which layer does it belong to?
-- Does it import/reference any forbidden layer?
-- Are there any dependency rule violations?
+Use this table format for reporting violations, as an example:
+| File | Line | Violation |
+|------|------|-----------|
+| `src/Domain/Order.cs` | 5 | Domain referencing Application |
 
-If violations are found, explain exactly what is wrong and provide a corrected version.
-
-After reviewing, run the architecture tests to confirm:
+If you didn't find any violations, run the architecture tests to confirm:
 
 ```
 dotnet test tests/ArchitectureTests --no-build --verbosity normal
 ```
+
+If all is clear, congratulate the user and confirm that the architecture is safe.
+
+Otherwise use the same table format to report which tests failed and what the issues were.
