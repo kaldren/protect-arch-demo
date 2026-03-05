@@ -4,29 +4,17 @@ description: 'Validate the current code structure against Clean Architecture rul
 
 # Validate Architecture
 
-Scan each class library for Clean Architecture violations based on the following rules:
+Your only job is to check each project's .csproj file for forbidden references based on the rules below.
 
 **Rules:**
 
-1. `Domain` must NOT reference `Application`, `Infrastructure`, `Api`, or any external library.
+1. `Domain` must NOT reference `Application`, `Infrastructure`, `Api`, or any other project / class library.
 2. `Application` must NOT reference `Infrastructure` or `Api`
 3. `Infrastructure` must NOT reference `Api`
 4. Repository interfaces belong in `Domain/Interfaces`, implementations in `Infrastructure/Repositories`
 5. Use cases belong in `Application/UseCases`
 
-If violations are found, explain that in bold and red with emoji that the architecture is at risk. List each violation with the file, line number, and which rule was broken.
-
-Use this table format for reporting violations, as an example:
+If you have found violations use the following table format to report them as an example:
 | File | Line | Violation |
 |------|------|-----------|
-| `src/Domain/Order.cs` | 5 | Domain referencing Application |
-
-If you didn't find any violations, run the architecture tests to confirm:
-
-```
-dotnet test tests/ArchitectureTests --no-build --verbosity normal
-```
-
-If all is clear, congratulate the user and confirm that the architecture is safe.
-
-Otherwise use the same table format to report which tests failed and what the issues were.
+| src/Domain/SomeClass.cs | 10 | Domain references Application |
