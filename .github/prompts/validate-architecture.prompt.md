@@ -1,5 +1,5 @@
 ---
-description: 'Validate the current code structure against Clean Architecture rules. Identify any violations and suggest corrections.'
+description: 'Validate the current code structure against Clean Architecture rules. Follow the specified rules below explicitly.'
 ---
 
 # Validate Architecture
@@ -18,3 +18,5 @@ If you have found violations use the following table format to report them as an
 | File | Line | Violation |
 |------|------|-----------|
 | src/Domain/SomeClass.cs | 10 | Domain references Application |
+
+If you haven't found any violations, simply respond with "✅ No violations found." and do not provide any additional commentary.
