@@ -1,6 +1,6 @@
 ---
 name: arch-guardian
-description: 'Architecture Guardian — reviews code for Clean Architecture violations'
+description: 'Reviews code for architecture guardrails violations'
 tools:
   - codebase
   - read/readFile
