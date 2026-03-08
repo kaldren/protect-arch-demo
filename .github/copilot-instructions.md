@@ -26,3 +26,4 @@ This project follows **Clean Architecture** principles. All contributions — hu
 - Use cases live in `Application/UseCases` and accept interfaces via constructor injection.
 - The Api project is the only place that configures DI and middleware — never register services elsewhere.
 - All new code must pass the architecture tests in `tests/ArchitectureTests` (run with `dotnet test`).
+- Follow the conventions in `docs/CODE_CONVENTIONS.md` and `docs/NAMING_CONVENTIONS.md`.

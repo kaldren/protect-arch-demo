@@ -9,7 +9,7 @@ TOOL=$(echo "$INPUT" | jq -r '.tool_name // empty')
 
 # Only run after file-editing tools
 case "$TOOL" in
-  editFiles|create_file|replace_string_in_file|write_to_file|insert_edit) ;;
+  editFiles|create_file|replace_string_in_file|multi_replace_string_in_file|write_to_file|insert_edit) ;;
   *)
     echo '{"continue": true}'
     exit 0

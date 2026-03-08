@@ -7,7 +7,7 @@ $input_json = [Console]::In.ReadToEnd() | ConvertFrom-Json
 $tool = $input_json.tool_name
 
 # Only run after file-editing tools
-if ($tool -notin @("editFiles", "create_file", "replace_string_in_file", "write_to_file", "insert_edit")) {
+if ($tool -notin @("editFiles", "create_file", "replace_string_in_file", "multi_replace_string_in_file", "write_to_file", "insert_edit")) {
     # Not a file edit — skip silently
     @{ continue = $true } | ConvertTo-Json
     exit 0
@@ -27,6 +27,9 @@ if ($LASTEXITCODE -ne 0) {
     $output | ConvertTo-Json -Depth 3
     exit 0
 }
+
+# Tests passed — confirm continue
+@{ continue = $true } | ConvertTo-Json
 
 @{ continue = $true } | ConvertTo-Json
 exit 0
