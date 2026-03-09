@@ -30,6 +30,4 @@ if ($LASTEXITCODE -ne 0) {
 
 # Tests passed — confirm continue
 @{ continue = $true } | ConvertTo-Json
-
-@{ continue = $true } | ConvertTo-Json
 exit 0

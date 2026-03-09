@@ -1,25 +1,25 @@
 ---
-description: 'Validate the current code structure against Clean Architecture rules. Follow the specified rules below explicitly.'
+description: 'Quick-check .csproj files for forbidden project references.'
 ---
 
 # Validate Architecture
 
-Your only job is to check each project's .csproj file for forbidden references based on the rules below.
+Your only job is to check each `.csproj` file under `src/` for forbidden `<ProjectReference>` entries.
 
-**Rules:**
+## Rules
 
-1. Follow everything below explicitly. Do not make do more than what is asked. Do not provide any additional commentary or suggestions. Only report violations based on the rules below.
-2. `Domain` must NOT reference `Application`, `Infrastructure`, `Api`, or any other project / class library.
-3. `Application` must NOT reference `Infrastructure` or `Api`
-4. `Infrastructure` must NOT reference `Api`
-5. Repository interfaces belong in `Domain/Interfaces`, implementations in `Infrastructure/Repositories`
-6. Use cases belong in `Application/UseCases`
+1. Read the dependency rules table in `docs/ARCHITECTURE.md` — that is the single source of truth.
+2. Open every `.csproj` under `src/` and compare its `<ProjectReference>` entries against the "Must NEVER reference" column.
+3. Do not provide additional commentary or suggestions — only report violations.
 
-If you have found violations, follow this format to report them. If there are multiple violations, list them all in a table format as shown below.
+## Output
 
-[Describe the violations you found in a clear and concise manner.]
-| Class Library | References |
-| --- | --- |
-| `Domain` | `Application` |
+If violations exist, list them in a table:
 
-If you haven't found any violations, simply respond with "✅ No violations found." and do not provide any additional commentary.
+| Project  | Forbidden Reference |
+| -------- | ------------------- |
+| `Domain` | `Application`       |
+
+If no violations exist, respond with:
+
+> ✅ No violations found.
