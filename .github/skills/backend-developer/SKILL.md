@@ -7,7 +7,7 @@ description: "Helps build backend features following the project's architecture 
 
 Every feature you build must follow:
 
-- **Architecture rules & dependency constraints** from the project's custom instructions (already loaded).
+- **Architecture rules & dependency constraints** from `docs/ARCHITECTURE.md`.
 - **Coding standards** from `docs/CODE_CONVENTIONS.md`.
 - **Naming patterns** from `docs/NAMING_CONVENTIONS.md`.
 
