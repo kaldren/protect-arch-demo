@@ -55,30 +55,30 @@ A reusable prompt that scans all `.csproj` files for forbidden `<ProjectReferenc
 
 ---
 
-### 3. Agent Skill (deep audit)
+### 3. Agent Skill (guided feature building)
 
-**File:** `.github/skills/architecture-health-report/SKILL.md`
+**File:** `.github/skills/backend-developer/SKILL.md`
 
-A portable skill that generates a full architecture health report — dependency rules, code-level `using` boundaries, naming conventions, and test coverage gaps. It reads all rules from their source files (custom instructions + conventions docs) so nothing is duplicated.
+A portable skill that guides Copilot through building backend features following the project's architecture guardrails. It enforces the inside-out workflow (Domain → Application → Infrastructure → Api) and reads all rules from the convention docs so nothing is duplicated.
 
-> **Trigger:** Picked up automatically when you ask Copilot for an "architecture health report", or invoke explicitly:
+> **Trigger:** Picked up automatically when you ask Copilot to add a new feature, or invoke explicitly:
 >
 > ```
-> /architecture-health-report
+> /backend-developer
 > ```
 
 ---
 
-### 4. Custom Agent (Architecture Guardian)
+### 4. Custom Agent (Architecture Scanning Agent)
 
-**File:** `.github/agents/arch-guardian.agent.md`
+**File:** `.github/agents/architect.agent.md`
 
-A custom agent persona with access to the codebase. It reviews files, checks dependencies, runs tests, and reports violations with fixes.
+A **read-only** scanning agent that analyses the codebase and produces a structured architecture health report. It checks dependency rules, code-level boundaries, structural placement, naming conventions, and test coverage — all derived from the convention docs. It never modifies files.
 
-> **Trigger:** Select **arch-guardian** from the agents dropdown in Copilot Chat, then ask:
+> **Trigger:** Select **architect** from the agents dropdown in Copilot Chat, then ask:
 >
 > ```
-> Review the codebase for architecture violations
+> Scan the codebase for architecture violations
 > ```
 
 ---
