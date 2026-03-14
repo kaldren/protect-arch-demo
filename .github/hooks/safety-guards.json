@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "command": "bash .github/hooks/scripts/protect-files.sh",
+        "windows": "powershell -ExecutionPolicy Bypass -File .github/hooks/scripts/protect-files.ps1",
+        "timeout": 10
+      },
+      {
+        "type": "command",
+        "command": "bash .github/hooks/scripts/block-dangerous-cmds.sh",
+        "windows": "powershell -ExecutionPolicy Bypass -File .github/hooks/scripts/block-dangerous-cmds.ps1",
+        "timeout": 10
+      }
+    ]
+  }
+}

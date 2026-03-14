@@ -5,39 +5,28 @@ description: "Helps build backend features following the project's architecture 
 
 # Backend Developer
 
-Every feature you build must follow:
-
-- **Architecture rules & dependency constraints** from `docs/ARCHITECTURE.md`.
-- **Coding standards** from `docs/CODE_CONVENTIONS.md`.
-- **Naming patterns** from `docs/NAMING_CONVENTIONS.md`.
-
-Read those files before generating any code. Do not repeat their content here.
+This skill provides the step-by-step procedure for building features. It assumes the `architecture-rules` and `coding-standards` skills are also loaded — do not restate their content.
 
 ## How to Build a Feature
 
-When asked to add a new feature (e.g., "add a Product entity with CRUD"), follow this order:
+When asked to add a new feature (e.g., "add a Product entity with CRUD"), follow the inside-out build order from the `architecture-rules` skill, applying these concrete actions at each layer:
 
-### Step 1 — Domain (innermost)
+### Step 1 — Domain
 
-- Create the entity in `src/Domain/Entities/` as a plain POCO.
-- Create the repository interface in `src/Domain/Interfaces/` (e.g., `IProductRepository`).
-- No `using` statements referencing other layers.
+- Create the entity as a plain POCO.
+- Create the repository interface.
 
 ### Step 2 — Application
 
-- Create use case classes in `src/Application/UseCases/`.
-- Queries: `Get{Name}Query`, `Get{Name}ByIdQuery`.
-- Commands: `Create{Name}Command`, `Update{Name}Command`, `Delete{Name}Command`.
-- Accept the repository interface via constructor injection. Never `new` up implementations.
+- Create use case classes — queries and commands per the naming patterns in `docs/NAMING_CONVENTIONS.md`.
 
 ### Step 3 — Infrastructure
 
-- Create the repository implementation in `src/Infrastructure/Repositories/` (e.g., `InMemoryProductRepository`).
-- Implement the interface from Domain.
+- Create the repository implementation (e.g., `InMemoryProductRepository`).
 
 ### Step 4 — Api
 
-- Register DI in `src/Api/Program.cs`: bind interface → implementation.
+- Register DI bindings in `Program.cs`.
 - Add endpoints using Minimal APIs (`app.MapGet`, `app.MapPost`, etc.).
 - Inject use cases into endpoint handlers.
 
@@ -45,9 +34,3 @@ When asked to add a new feature (e.g., "add a Product entity with CRUD"), follow
 
 - Run `dotnet test tests/ArchitectureTests` to confirm no violations.
 - Run `dotnet build` to confirm compilation.
-
-## Rules
-
-- Always work from the inside out: Domain → Application → Infrastructure → Api.
-- Never skip a layer or put logic in the wrong one.
-- Check `docs/NAMING_CONVENTIONS.md` for type naming patterns before creating files.

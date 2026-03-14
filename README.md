@@ -55,13 +55,20 @@ A reusable prompt that scans all `.csproj` files for forbidden `<ProjectReferenc
 
 ---
 
-### 3. Agent Skill (guided feature building)
+### 3. Agent Skills (reusable knowledge modules)
 
-**File:** `.github/skills/backend-developer/SKILL.md`
+**Folder:** `.github/skills/`
 
-A portable skill that guides Copilot through building backend features following the project's architecture guardrails. It enforces the inside-out workflow (Domain → Application → Infrastructure → Api) and reads all rules from the convention docs so nothing is duplicated.
+Portable skills that inject domain-specific knowledge into Copilot and agents. Each skill encapsulates a set of rules so nothing is duplicated across agents.
 
-> **Trigger:** Picked up automatically when you ask Copilot to add a new feature, or invoke explicitly:
+| Skill                | File                                         | Purpose                                                                                            |
+| -------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `backend-developer`  | `.github/skills/backend-developer/SKILL.md`  | Guides feature building with the inside-out workflow (Domain → Application → Infrastructure → Api) |
+| `architecture-rules` | `.github/skills/architecture-rules/SKILL.md` | Layer definitions, dependency rules, and structural placement rules                                |
+| `coding-standards`   | `.github/skills/coding-standards/SKILL.md`   | Code quality, naming, async, and security rules                                                    |
+| `testing-patterns`   | `.github/skills/testing-patterns/SKILL.md`   | Test conventions, naming, framework setup, and ArchUnitNET patterns                                |
+
+> **Trigger:** Skills are picked up automatically by agents that reference them. You can also invoke the backend-developer skill explicitly:
 >
 > ```
 > /backend-developer
@@ -69,28 +76,43 @@ A portable skill that guides Copilot through building backend features following
 
 ---
 
-### 4. Custom Agent (Architecture Scanning Agent)
+### 4. Custom Agents (multi-agent workflow)
 
-**File:** `.github/agents/architect.agent.md`
+**Folder:** `.github/agents/`
 
-A **read-only** scanning agent that analyses the codebase and produces a structured architecture health report. It checks dependency rules, code-level boundaries, structural placement, naming conventions, and test coverage — all derived from the convention docs. It never modifies files.
+Six specialised agents that can be used independently or orchestrated together for full feature lifecycles.
 
-> **Trigger:** Select **architect** from the agents dropdown in Copilot Chat, then ask:
+| Agent            | File                     | Role                                                                                                              |
+| ---------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| `@architect`     | `architect.agent.md`     | **Read-only** scanner — produces architecture health reports in table format. Never modifies files.               |
+| `@backend`       | `backend.agent.md`       | **Orchestrator** — coordinates the full feature lifecycle by delegating to Draft → Review → Test → Documentation. |
+| `@draft`         | `draft.agent.md`         | Generates initial code following clean architecture and the inside-out build order.                               |
+| `@review`        | `review.agent.md`        | Reviews code for quality, security, and architecture compliance. Never modifies files — only reports findings.    |
+| `@test`          | `test.agent.md`          | Creates comprehensive test suites (unit, integration, architecture) and ensures all tests pass.                   |
+| `@documentation` | `documentation.agent.md` | Generates and updates project documentation — README, API docs, ADRs, and inline doc comments.                    |
+
+> **Trigger:** Select an agent from the agents dropdown in Copilot Chat. Examples:
 >
 > ```
-> Scan the codebase for architecture violations
+> @architect Scan the codebase for architecture violations
+> @backend Add a Product entity with CRUD endpoints
 > ```
 
 ---
 
-### 5. Hook (automated enforcement)
+### 5. Hooks (automated safety guards)
 
-**File:** `.github/hooks/arch-guard.json`
-**Scripts:** `.github/hooks/scripts/arch-test.ps1` / `arch-test.sh`
+**File:** `.github/hooks/safety-guards.json`
+**Scripts:** `.github/hooks/scripts/`
 
-A `PostToolUse` hook that runs `dotnet test tests/ArchitectureTests` automatically after Copilot edits any file. If tests fail, the violation is fed back to the agent as context so it can self-correct.
+Two `PreToolUse` hooks that intercept Copilot actions **before** they execute, preventing dangerous operations.
 
-> **Trigger:** Automatic — just use Copilot in agent mode to edit files. The hook fires after every edit.
+| Hook                         | Scripts                                                | What it does                                                                                                                                                                                           |
+| ---------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Protect Files**            | `protect-files.ps1` / `protect-files.sh`               | Blocks edits to protected convention files (`docs/ARCHITECTURE.md`, `docs/CODE_CONVENTIONS.md`, `docs/NAMING_CONVENTIONS.md`, `.github/copilot-instructions.md`, `.github/hooks/`, `.github/skills/`). |
+| **Block Dangerous Commands** | `block-dangerous-cmds.ps1` / `block-dangerous-cmds.sh` | Blocks destructive terminal commands — recursive deletions, force pushes, `DROP TABLE`, accidental `npm publish` / `dotnet nuget push`, and more.                                                      |
+
+> **Trigger:** Automatic — fires before every file edit or terminal command in agent mode. Blocked actions return a denial reason to the agent.
 
 ---
 

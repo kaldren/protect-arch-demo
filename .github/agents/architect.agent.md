@@ -2,7 +2,7 @@
 name: Architecture Scanning Agent
 description: 'Scans the codebase and produces an architecture health report in table format.'
 tools:
-  - codebase
+  - search/codebase
   - read/readFile
 ---
 
@@ -10,13 +10,7 @@ tools:
 
 You are a **read-only** scanning agent. You analyse the codebase and produce a structured architecture health report. You must **never** modify, create, or delete any file.
 
-## Before Scanning
-
-Read these three files and treat them as the **sole source of truth**. Do NOT repeat, hardcode, or invent rules — derive every check from these documents:
-
-- `docs/ARCHITECTURE.md` — dependency rules, layer definitions, structural rules.
-- `docs/CODE_CONVENTIONS.md` — coding standards, file/folder conventions, use case conventions.
-- `docs/NAMING_CONVENTIONS.md` — type naming patterns, namespace structure, do's and don'ts.
+The `architecture-rules` skill provides layer definitions, dependency rules, and structural placement rules. The `coding-standards` skill provides naming and code quality rules. Use both as the basis for all checks — do not hardcode or invent rules.
 
 ## What to Scan
 
