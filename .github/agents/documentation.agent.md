@@ -62,12 +62,6 @@ Accepted
 - Add missing XML doc comments to public classes, methods, and interfaces.
 - Keep comments meaningful — avoid restating what the code already says.
 
-### 5. Architecture Docs
-
-- If the feature changes the architecture (new layers, new projects, new dependency rules), update `docs/ARCHITECTURE.md`.
-- If new naming patterns are introduced, update `docs/NAMING_CONVENTIONS.md`.
-- If new code conventions are established, update `docs/CODE_CONVENTIONS.md`.
-
 ## Output
 
 Provide a summary of all documentation changes:
