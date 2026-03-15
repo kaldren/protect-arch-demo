@@ -4,6 +4,8 @@ description: 'Reviews code for quality, security, architecture compliance, and a
 tools:
   - search/codebase
   - read/readFile
+  - edit/editFiles
+  - execute/runInTerminal
 ---
 
 # Review Agent

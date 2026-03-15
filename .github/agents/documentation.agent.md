@@ -5,6 +5,7 @@ tools:
   - search/codebase
   - read/readFile
   - edit/editFiles
+  - execute/runInTerminal
 ---
 
 # Documentation Agent
