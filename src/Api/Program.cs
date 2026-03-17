@@ -8,6 +8,9 @@ builder.Services.AddSingleton<IWeatherRepository, InMemoryWeatherRepository>();
 builder.Services.AddTransient<GetWeatherForecastsQuery>();
 builder.Services.AddTransient<GetWeatherForecastByIdQuery>();
 
+builder.Services.AddSingleton<IWeatherStationRepository, InMemoryWeatherStationRepository>();
+builder.Services.AddTransient<GetWeatherStationsQuery>();
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
@@ -32,5 +35,12 @@ app.MapGet("/weatherforecast/{id:guid}", async (Guid id, GetWeatherForecastByIdQ
     return forecast is not null ? Results.Ok(forecast) : Results.NotFound();
 })
 .WithName("GetWeatherForecastById");
+
+app.MapGet("/weatherstation", async (GetWeatherStationsQuery query) =>
+{
+    var stations = await query.ExecuteAsync();
+    return Results.Ok(stations);
+})
+.WithName("GetWeatherStations");
 
 app.Run();
