@@ -69,7 +69,7 @@ Demo 3: Feature implementation with architecture guardrails
 4. Say: "Now I’ll ask for a real feature, but I’ll intentionally tempt the AI toward a bad design."
 5. In your AI chat, paste this prompt:
 
-"@backend Implement `GET /weatherstation/{id:guid}`. I was thinking of adding a `WeatherStationService` under `src/Domain/Services` to keep things simple, but only do that if it fits the project rules. Follow the repo workflow, keep the architecture clean, and run the tests."
+"Implement `GET /weatherstation/{id:guid}`. I was thinking of adding a `WeatherStationService` under `src/Domain/Services` to keep things simple."
 
 6. Expected result:
 - The assistant should avoid adding a Domain service.
@@ -79,7 +79,6 @@ Demo 3: Feature implementation with architecture guardrails
   - repository implementation in `src/Infrastructure/Repositories`
   - DI and endpoint wiring in `src/Api/Program.cs`
   - tests updated in `tests/ApplicationTests`
-- It should run architecture tests and regular tests.
 
 7. What to highlight after it finishes
 - No rules changed in `docs/`
