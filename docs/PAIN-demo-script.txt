@@ -113,6 +113,7 @@ Why this demo is credible
 Using multiple agents in parallel for PR review
 - `Review the PR https://github.com/Helion-Engine/Helion/pull/1454 in parallel across opus, haiku, and gemini.`" 
 - This helps with fighting hallucinations 
+- See https://youtu.be/aKUZCxTdDDg?t=1348
 
 Suggested close
 - "PAIN Architecture is not just about where code goes. It is about building a delivery environment where AI is useful, but not trusted with unlimited freedom."
